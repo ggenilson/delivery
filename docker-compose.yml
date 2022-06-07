@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:13.1
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-q', '-d', 'postgres', '-U', 'root']
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=postgres2022
+      - POSTGRES_DB=prisma_deliveries
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
